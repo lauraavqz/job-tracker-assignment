@@ -26,7 +26,7 @@ Some prompts I used were:
 
 ## What AI Helped With
 
-AI was most helpful when I needed a starting point or when I got stuck on an error. It helped me understand how different parts of the project fit together, especially the Flask routes, templates, and database connection.
+AI was most helpful when I needed a starting point or when I got stuck on an error. It helped me understand how different parts of the project fit together, especially the Flask routes, templates, and database connection. It aslo helped me with uploading my files to GitHub.
 
 ## What I Changed
 

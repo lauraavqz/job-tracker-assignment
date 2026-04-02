@@ -37,7 +37,7 @@ This project is a job application tracker that I built for my COP4751 course. It
 ### 1. Clone the repository
 
 ```bash
-git clone YOUR_GITHUB_REPOSITORY_URL
+git clone https://github.com/lauraavqz/job-tracker-assignment.git
 cd job_tracker
 ```
 
@@ -67,7 +67,7 @@ Example:
 DB_CONFIG = {
     "host": "localhost",
     "user": "root",
-    "password": "YOUR_PASSWORD_HERE",
+    "password": "root123",
     "database": "job_tracker",
 }
 ```
