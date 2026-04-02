@@ -2,6 +2,8 @@
 
 This project is a job application tracker that I built for my COP4751 course. It helps users keep track of companies, jobs, applications, and contacts in one place. It also includes a Job Match feature that compares user skills to job requirements and shows a match percentage.
 
+Video Link -- https://drive.google.com/file/d/12km-JXQH1fnwZnU-AN5yBbB8wFsBdvZZ/view?usp=sharing
+
 ## Technologies Used
 
 - Python
