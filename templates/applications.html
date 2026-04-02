@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+
+{% block title %}Applications{% endblock %}
+
+{% block content %}
+<h2>Applications</h2>
+
+<div class="card">
+    <h3>{% if edit_application %}Edit Application{% else %}Add New Application{% endif %}</h3>
+
+    <form method="POST" action="{% if edit_application %}{{ url_for('edit_application', application_id=edit_application.application_id) }}{% else %}{{ url_for('add_application') }}{% endif %}">
+        <div class="form-group">
+            <label for="job_id">Job</label>
+            <select id="job_id" name="job_id" required>
+                <option value="">Select a job</option>
+                {% for job in jobs %}
+                <option value="{{ job.job_id }}" {% if edit_application and job.job_id == edit_application.job_id %}selected{% endif %}>
+                    {{ job.job_title }} - {{ job.company_name }}
+                </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="application_date">Application Date</label>
+            <input type="date" id="application_date" name="application_date" value="{{ edit_application.application_date if edit_application else '' }}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="status">Status</label>
+            <select id="status" name="status" required>
+                <option value="">Select status</option>
+                {% for status in ['Applied','Screening','Interview','Offer','Rejected','Withdrawn'] %}
+                <option value="{{ status }}" {% if edit_application and edit_application.status == status %}selected{% endif %}>{{ status }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="resume_version">Resume Version</label>
+            <input type="text" id="resume_version" name="resume_version" value="{{ edit_application.resume_version if edit_application else '' }}">
+        </div>
+
+        <div class="form-group">
+            <label for="cover_letter_sent">Cover Letter Sent</label>
+            <select id="cover_letter_sent" name="cover_letter_sent">
+                <option value="0" {% if not edit_application or not edit_application.cover_letter_sent %}selected{% endif %}>No</option>
+                <option value="1" {% if edit_application and edit_application.cover_letter_sent %}selected{% endif %}>Yes</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="interview_data">Interview Data</label>
+            <textarea id="interview_data" name="interview_data" rows="4" placeholder='Example: {"interview_date":"2026-03-30","notes":"Phone screening with recruiter"}'>{% if edit_application %}{{ edit_application.interview_data_input }}{% endif %}</textarea>
+        </div>
+
+        <div class="button-group">
+            <button type="submit" class="btn">{% if edit_application %}Update Application{% else %}Add Application{% endif %}</button>
+            {% if edit_application %}
+            <a href="{{ url_for('applications') }}" class="btn btn-secondary">Cancel</a>
+            {% endif %}
+        </div>
+    </form>
+</div>
+
+<div class="card">
+    <h3>Application List</h3>
+
+    {% if applications %}
+    <table>
+        <thead>
+        <tr>
+            <th>Job Title</th>
+            <th>Company</th>
+            <th>Application Date</th>
+            <th>Status</th>
+            <th>Resume Version</th>
+            <th>Cover Letter</th>
+            <th>Interview Data</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for application in applications %}
+        <tr>
+            <td>{{ application.job_title }}</td>
+            <td>{{ application.company_name }}</td>
+            <td>{{ application.application_date }}</td>
+            <td>{{ application.status }}</td>
+            <td>{{ application.resume_version or 'N/A' }}</td>
+            <td>{% if application.cover_letter_sent %}Yes{% else %}No{% endif %}</td>
+            <td>{{ application.interview_data_text }}</td>
+            <td class="actions">
+                <a href="{{ url_for('edit_application', application_id=application.application_id) }}" class="btn btn-edit">Edit</a>
+                <form method="POST" action="{{ url_for('delete_application', application_id=application.application_id) }}" class="inline-form">
+                    <button type="submit" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this application?');">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>No applications found. Add your first application above.</p>
+    {% endif %}
+</div>
+{% endblock %}

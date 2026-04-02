@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}Job Match{% endblock %}
+
+{% block content %}
+<h2>Job Match</h2>
+
+<div class="card">
+    <h3>Find Matching Jobs</h3>
+    <form method="POST" action="{{ url_for('job_match') }}">
+        <div class="form-group">
+            <label for="skills">Enter Your Skills</label>
+            <textarea id="skills" name="skills" rows="4" placeholder="Example: Python, SQL, Flask">{{ entered_skills or '' }}</textarea>
+        </div>
+
+        <button type="submit" class="btn">Check Matches</button>
+    </form>
+</div>
+
+<div class="card">
+    <h3>Matching Results</h3>
+
+    {% if matches %}
+    <table>
+        <thead>
+        <tr>
+            <th>Job Title</th>
+            <th>Company</th>
+            <th>Match %</th>
+            <th>Matched Skills</th>
+            <th>Missing Skills</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for match in matches %}
+        <tr>
+            <td>{{ match.job_title }}</td>
+            <td>{{ match.company_name }}</td>
+            <td>{{ match.match_percentage }}%</td>
+            <td>
+                {% if match.matched_skills %}
+                {{ match.matched_skills | join(', ') }}
+                {% else %}
+                None
+                {% endif %}
+            </td>
+            <td>
+                {% if match.missing_skills %}
+                {{ match.missing_skills | join(', ') }}
+                {% else %}
+                None
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% elif entered_skills %}
+    <p>No matching jobs found.</p>
+    {% else %}
+    <p>Enter your skills above to see matching jobs.</p>
+    {% endif %}
+</div>
+{% endblock %}

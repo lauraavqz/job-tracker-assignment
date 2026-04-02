@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<h2>Dashboard</h2>
+
+<div class="stats-grid">
+    <div class="card">
+        <h3>Total Companies</h3>
+        <p class="stat-number">{{ stats.companies }}</p>
+    </div>
+
+    <div class="card">
+        <h3>Total Jobs</h3>
+        <p class="stat-number">{{ stats.jobs }}</p>
+    </div>
+
+    <div class="card">
+        <h3>Total Applications</h3>
+        <p class="stat-number">{{ stats.applications }}</p>
+    </div>
+
+    <div class="card">
+        <h3>Total Contacts</h3>
+        <p class="stat-number">{{ stats.contacts }}</p>
+    </div>
+</div>
+
+<div class="card">
+    <h3>Application Status Breakdown</h3>
+
+    {% if status_counts %}
+    <table>
+        <thead>
+        <tr>
+            <th>Status</th>
+            <th>Count</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for row in status_counts %}
+        <tr>
+            <td>{{ row.status }}</td>
+            <td>{{ row.total }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>No application data available yet.</p>
+    {% endif %}
+</div>
+
+<div class="card">
+    <h3>Recent Applications</h3>
+
+    {% if recent_applications %}
+    <table>
+        <thead>
+        <tr>
+            <th>Date</th>
+            <th>Job Title</th>
+            <th>Company</th>
+            <th>Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for app in recent_applications %}
+        <tr>
+            <td>{{ app.application_date }}</td>
+            <td>{{ app.job_title }}</td>
+            <td>{{ app.company_name }}</td>
+            <td>{{ app.status }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>No recent applications found.</p>
+    {% endif %}
+</div>
+
+<div class="card">
+    <h3>Quick Actions</h3>
+    <div class="button-group">
+        <a href="{{ url_for('companies') }}" class="btn">Manage Companies</a>
+        <a href="{{ url_for('jobs') }}" class="btn">Manage Jobs</a>
+        <a href="{{ url_for('applications') }}" class="btn">Manage Applications</a>
+        <a href="{{ url_for('contacts') }}" class="btn">Manage Contacts</a>
+    </div>
+</div>
+{% endblock %}
