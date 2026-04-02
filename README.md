@@ -50,12 +50,6 @@ Make sure Python and MySQL are installed first.
 Then run:
 
 ```bash
-pip install -r requirements.txt
-```
-
-If that does not work, try:
-
-```bash
 pip3 install -r requirement.txt
 ```
 
@@ -95,12 +89,6 @@ This will:
 ### 5. Run the Flask app
 
 In the project folder, run:
-
-```bash
-python app.py
-```
-
-If that does not work, try:
 
 ```bash
 python3 app.py
