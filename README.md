@@ -40,7 +40,7 @@ Video Link -- https://drive.google.com/file/d/12km-JXQH1fnwZnU-AN5yBbB8wFsBdvZZ/
 
 ```bash
 git clone https://github.com/lauraavqz/job-tracker-assignment.git
-cd job_tracker
+
 ```
 
 ### 2. Install dependencies
@@ -56,7 +56,7 @@ pip install -r requirements.txt
 If that does not work, try:
 
 ```bash
-pip3 install -r requirements.txt
+pip3 install -r requirement.txt
 ```
 
 ### 3. Set your MySQL connection
@@ -74,7 +74,6 @@ DB_CONFIG = {
 }
 ```
 
-If the class uses a shared password from the professor, replace the password with that value.
 
 ### 4. Create the database
 
@@ -119,7 +118,7 @@ http://127.0.0.1:5000
 
 - Make sure MySQL is running before starting the app.
 - The database name must be `job_tracker`.
-- The `requirements` field in jobs stores JSON data.
+- The `requirement` field in jobs stores JSON data.
 - The `interview_data` field in applications stores JSON data.
 - If a company is deleted, related jobs and contacts may also be deleted because of foreign key relationships.
 
